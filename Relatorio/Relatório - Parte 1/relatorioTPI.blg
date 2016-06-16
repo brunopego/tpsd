@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: relatorioTPI.aux
+The style file: plain.bst
+Illegal, another \bibstyle command---line 34 of file relatorioTPI.aux
+ : \bibstyle
+ :          {abbrv}
+I'm skipping whatever remains of this command
+Database file #1: relatorioTPI.bib
+Warning--to sort, need author or key in Wiki
+Warning--to sort, need author or key in Wiki2
+Warning--to sort, need author or key in Wiki3
+Warning--to sort, need author or key in Wiki4
+You've used 4 entries,
+            2118 wiz_defined-function locations,
+            515 strings with 4408 characters,
+and the built_in function-call counts, 692 in all, are:
+= -- 68
+> -- 4
+< -- 0
++ -- 4
+- -- 0
+* -- 22
+:= -- 85
+add.period$ -- 12
+call.type$ -- 4
+change.case$ -- 12
+chr.to.int$ -- 0
+cite$ -- 8
+duplicate$ -- 28
+empty$ -- 93
+format.name$ -- 0
+if$ -- 169
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 0
+newline$ -- 23
+num.names$ -- 0
+pop$ -- 40
+preamble$ -- 1
+purify$ -- 8
+quote$ -- 0
+skip$ -- 20
+stack$ -- 0
+substring$ -- 20
+swap$ -- 4
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 16
+warning$ -- 4
+while$ -- 0
+width$ -- 5
+write$ -- 38
+(There was 1 error message)

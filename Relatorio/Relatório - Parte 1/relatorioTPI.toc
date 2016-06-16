@@ -1,0 +1,8 @@
+\select@language {brazil}
+\contentsline {section}{\numberline {1}Introdu\IeC {\c c}\~ao}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}Descri\IeC {\c c}\~ao do Problema}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Vis\~ao geral sobre o funcionamento do programa}{2}{subsection.1.2}
+\contentsline {section}{\numberline {2}Implementa\IeC {\c c}\~ao}{3}{section.2}
+\contentsline {section}{\numberline {3}Listagem de testes executados}{8}{section.3}
+\contentsline {section}{\numberline {4}Conclus\~ao}{14}{section.4}
+\contentsline {section}{Refer\^encias}{14}{section*.2}

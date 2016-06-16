@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{Wiki}
+Socket basico.
+\newblock \url{http://wiki.python.org.br/SocketBasico}.
+\newblock Acessado em: 17-05-2016.
+
+\bibitem{Wiki2}
+Socket objects.
+\newblock \url{https://docs.python.org/2/library/socket.html#socket-objects}.
+\newblock Acessado em: 17-05-2016.
+
+\bibitem{Wiki4}
+Socket programming howto.
+\newblock \url{https://docs.python.org/2/howto/sockets.html}.
+\newblock Acessado em: 15-05-2016.
+
+\bibitem{Wiki3}
+socket — low-level networking interface.
+\newblock \url{https://docs.python.org/3/library/socket.html#}.
+\newblock Acessado em: 20-05-2016.
+
+\end{thebibliography}
