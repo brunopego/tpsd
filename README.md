@@ -1,2 +1,1 @@
-# tpsd
-Trabalho Prático - Sistemas Distribuídos
+# Trabalho Prático - Sistemas Distribuídos
