@@ -78,7 +78,6 @@ class LinhaProducao:
             print("Quantidade de produtos com defeito: ", produtosComDefeitos)
             print("Solicitando materiais para cobrir os defeituosos ...")
             self.controlador.send(str(produtosComDefeitos).encode('utf-8'))
-            #TODO: Aqui tinha um problema pois nao recebia a resposta, porem esta dando outro erro :/
             resp = self.controlador.recv(128).decode('utf-8')
             self.produz(resp)
 
