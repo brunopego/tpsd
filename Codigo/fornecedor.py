@@ -9,7 +9,7 @@ class Fornecedor:
     # Metodo que define o endereco IP / porta do fornecedor
     def __init__(self):
         self.host = '127.0.0.1'
-        self.port = 5001
+        self.port = 4001
         self.s = socket.socket()
         self.s.bind((self.host, self.port))
 

@@ -7,40 +7,40 @@ class LinhaProducao:
     endr = None
 
     hostSensorInicial = '127.0.0.1'
-    portaSensorInicial = '6000'
+    portaSensorInicial = 4004
 
     # Metodo que define o endereco da linha de producao e sua porta
     def __init__(self):
         self.host = '127.0.0.1'
-        self.port = 5002
-        self.portaRespostaSensorFinal = 7000
+        self.port = 4002
+        self.portaRespostaSensorFinal = 4003
         self.s = socket.socket()
         self.s.bind((self.host, self.port))
-
         self.s.listen(1)
+
+        self.socketRecebeSensorFinal = socket.socket()
+        self.socketRecebeSensorFinal.bind((self.host, self.portaRespostaSensorFinal))
+        self.socketRecebeSensorFinal.listen(1)
 
     # Metodo que fara o produto (recebe a quantidade de produto que deve ser feito)
     def produz(self, qtd):
 
-        nqtd = int(qtd)
-
         socketSensorInicial = socket.socket()
         socketSensorInicial.connect((self.hostSensorInicial, self.portaSensorInicial))
-        socketSensorInicial.send(str(nqtd).encode('utf-8'))
+        socketSensorInicial.send(str(qtd).encode('utf-8'))
         socketSensorInicial.close()
 
-        socketRecebeSensorFinal = socket.socket()
-        socketRecebeSensorFinal.bind((self.host, self.portaSensorInicial))
-        socketRecebeSensorFinal.listen(1)
 
-        socketSensorFinal, sensorFinalEdr = socketRecebeSensorFinal.accept()
+
+        socketSensorFinal, sensorFinalEndr = self.socketRecebeSensorFinal.accept()
         msg = socketSensorFinal.recv(128).decode('utf-8')
-        socketRecebeSensorFinal.close()
+        print("Recebeu do final -> "+msg)
+        #socketRecebeSensorFinal.close()
 
-        produtosComDefeitos = nqtd - int(msg)
+        produtosComDefeitos = int(qtd) - int(msg)
 
         # Finalmente retorna o resultado de produtos com defeito e a quantidade produzida independente do defeito
-        self.retornaResultado(produtosComDefeitos, nqtd)
+        self.retornaResultado(produtosComDefeitos, int(qtd))
 
 
     # Metodo para retornar o resultado para o controlador de producao
@@ -60,7 +60,7 @@ class LinhaProducao:
             resp = self.controlador.recv(128).decode('utf-8')
             self.produz(resp)
 
-# Mètodo principal que cria um objeto do tipo linha de producao e que ira receber uma conexao do controlador
+# Metodo principal que cria um objeto do tipo linha de producao e que ira receber uma conexao do controlador
 def main():
     linhaProducao = LinhaProducao()
     while True:

@@ -14,8 +14,8 @@ class controladorProducao:
     # e outras variaveis sobre fornecedor e linha de producao
     cliente = None
     endr = None
-    porta_fornecedor = 5001
-    porta_linhaProducao = 5002
+    porta_fornecedor = 4001
+    porta_linhaProducao = 4002
     capacidade_linhaProducao = 30
 
 
@@ -24,7 +24,7 @@ class controladorProducao:
         self.hostLinhaProducao = '127.0.0.1'
         self.hostFornecedor = '127.0.0.1'
         self.host = '127.0.0.1'
-        self.port = 5005
+        self.port = 4000
 
         #Cria-se entao um socket para receber conexoes
         self.s = socket.socket()

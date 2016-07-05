@@ -8,12 +8,12 @@ class Equipamento:
     endr = None
 
     hostSensorFinal = '127.0.0.1'
-    portaSensorFinal = '6002'
+    portaSensorFinal = 4006
 
     # Metodo que define o endereco da linha de producao e sua porta
     def __init__(self):
         self.host = '127.0.0.1'
-        self.port = 6001
+        self.port = 4005
         self.s = socket.socket()
         self.s.bind((self.host, self.port))
 
@@ -22,7 +22,7 @@ class Equipamento:
 
     # Metodo que "verifica" se a materia prima esta ou nao com defeito (apenas gera um numero aleatorio)
     def verificarMateriaPrima(self, qtd):
-
+        print("Entrou equipamento")
         produtosComDefeito = 0
         i = 0
 
@@ -30,7 +30,7 @@ class Equipamento:
             defeito = randrange(0, 10)
             if defeito == 1:
                 produtosComDefeito += 1
-        i += 1
+            i += 1
 
         msg = str(qtd-produtosComDefeito)
         socketEquipamento = socket.socket()

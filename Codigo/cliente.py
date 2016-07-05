@@ -11,8 +11,9 @@ class cliente():
     #o endereco do proprio cliente e a porta do controlador por onde sera feita a comunicacao
     def __init__(self):
         self.hostconnectControlador = '127.0.0.1'
-        self.host = '127.0.0.1'
-        self.port = 5005
+        #self.host = '127.0.0.1'
+        #self.port = 5005
+        self.portControlador = 4000
 
 
     #Metodo onde se cria um socket para comunicacao com o controlador de producao
@@ -20,7 +21,7 @@ class cliente():
 
         #O bloco abaixo cria o socket, conecta ao controlador e envia a quantidade de produtos que o usuario digitou
         self.s = socket.socket()
-        self.s.connect((self.hostconnectControlador, self.port))
+        self.s.connect((self.hostconnectControlador, self.portControlador))
         self.s.send(resp.encode('utf-8'))
         #A linha abaixo fica esperando a resposta do controlador e logo apos fecha o socket de comunicacao
         msg = self.s.recv(128).decode('utf-8')
