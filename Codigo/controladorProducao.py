@@ -139,7 +139,6 @@ class controladorProducao:
         cliente.send("Produtos Prontos!".encode('utf-8'))
         return 0
 
-
 #Metodo principal que criara um controlador para manipular conexoes e transacoe de informacao entre os sistemas distribuidos
 def main():
     cp = controladorProducao()

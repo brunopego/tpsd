@@ -1,5 +1,4 @@
 import socket
-from random import randrange
 
 class LinhaProducao:
 
@@ -7,10 +6,14 @@ class LinhaProducao:
     controlador = None
     endr = None
 
+    hostSensorInicial = '127.0.0.1'
+    portaSensorInicial = '6000'
+
     # Metodo que define o endereco da linha de producao e sua porta
     def __init__(self):
         self.host = '127.0.0.1'
         self.port = 5002
+        self.portaRespostaSensorFinal = 7000
         self.s = socket.socket()
         self.s.bind((self.host, self.port))
 
@@ -18,50 +21,27 @@ class LinhaProducao:
 
     # Metodo que fara o produto (recebe a quantidade de produto que deve ser feito)
     def produz(self, qtd):
+
         nqtd = int(qtd)
 
-        # Inicialmente define uma variavel i como contador para o laco e outra
-        # que vai contar o numero de produtos defeituosos
-        # o laco trata em cada if se o produto esta defeituoso e caso sim adiciona +1 em produtosComDefeitos
-        # Faz um produto de cada vez
-        i = 0
-        produtosComDefeitos = 0
-        while i < nqtd:
-            if self.sensorInicial() == True:
-                if self.equipamentoDeProducao() == True:
-                    if self.sensorFinal() == True:
-                        print("Produto produzido: ", i+1)
-                    else:
-                        produtosComDefeitos += 1
-                else:
-                    produtosComDefeitos += 1
-            else:
-                produtosComDefeitos += 1
+        socketSensorInicial = socket.socket()
+        socketSensorInicial.connect((self.hostSensorInicial, self.portaSensorInicial))
+        socketSensorInicial.send(str(nqtd).encode('utf-8'))
+        socketSensorInicial.close()
 
-            i += 1
+        socketRecebeSensorFinal = socket.socket()
+        socketRecebeSensorFinal.bind((self.host, self.portaSensorInicial))
+        socketRecebeSensorFinal.listen(1)
+
+        socketSensorFinal, sensorFinalEdr = socketRecebeSensorFinal.accept()
+        msg = socketSensorFinal.recv(128).decode('utf-8')
+        socketRecebeSensorFinal.close()
+
+        produtosComDefeitos = nqtd - int(msg)
+
         # Finalmente retorna o resultado de produtos com defeito e a quantidade produzida independente do defeito
         self.retornaResultado(produtosComDefeitos, nqtd)
 
-    # Metodo que "verifica" se a materia prima esta ou nao com defeito (apenas gera um numero aleatorio)
-    def sensorInicial(self):
-        defeito = randrange(0, 10)
-        if defeito == 1:
-            return False
-        return True
-
-    # Metodo que "verifica" o produto durante o processo de producao (apenas gera um numero aleatorio)
-    def equipamentoDeProducao(self):
-        defeito = randrange(0, 10)
-        if defeito == 2:
-            return False
-        return True
-
-    # Metodo que "verifica" o produto final (apenas gera um numero aleatorio)
-    def sensorFinal(self):
-        defeito = randrange(0, 10)
-        if defeito == 2:
-            return False
-        return True
 
     # Metodo para retornar o resultado para o controlador de producao
     def retornaResultado(self, produtosComDefeitos: int, qtd: int):
@@ -69,7 +49,6 @@ class LinhaProducao:
             print("Produtos prontos para serem entregues! ")
             print("Quantidade de produto com defeito: ", produtosComDefeitos)
             self.controlador.send(str(produtosComDefeitos).encode('utf-8'))
-            #self.controlador.close()
 
         else:
             print("Alguns produtos foram descartados por serem defeituosos!")
@@ -87,6 +66,7 @@ def main():
     while True:
         linhaProducao.controlador, linhaProducao.endr = linhaProducao.s.accept()
         msg = linhaProducao.controlador.recv(128).decode('utf-8')
+        msg = int(msg)
         linhaProducao.produz(msg)
 
 

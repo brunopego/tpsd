@@ -22,6 +22,7 @@ class Equipamento:
 
     # Metodo que "verifica" se a materia prima esta ou nao com defeito (apenas gera um numero aleatorio)
     def verificarMateriaPrima(self, qtd):
+
         produtosComDefeito = 0
         i = 0
 
@@ -33,9 +34,8 @@ class Equipamento:
 
         msg = str(qtd-produtosComDefeito)
         socketEquipamento = socket.socket()
-        socketEquipamento.connect(self.hostEquipamento, self.portaEquipamento)
-        socketEquipamento.send(msg)
-        socketEquipamento.send(self.controlador)
+        socketEquipamento.connect((self.hostSensorFinal, self.portaSensorFinal))
+        socketEquipamento.send(msg.encode('utf-8'))
         socketEquipamento.close()
 
 
@@ -45,7 +45,7 @@ def main():
     while True:
         equipamento.controlador, equipamento.endr = equipamento.s.accept()
         msg = equipamento.controlador.recv(128).decode('utf-8')
-        controladorProducao = equipamento.controlador.recv(1024)
+        msg = int(msg)
         equipamento.verificarMateriaPrima(msg)
 
 

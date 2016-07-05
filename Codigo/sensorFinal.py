@@ -1,12 +1,14 @@
 import socket
 from random import randrange
 
-class SensorInicial:
+class SensorFinal:
 
     # Cricao das variaveis referentes ao socket ao endereco ip / porta do controlador
     controlador = None
     endr = None
 
+    hostLinhaProducao = '127.0.0.1'
+    portaRespostaLinhaProducao = '7000'
 
     # Metodo que define o endereco da linha de producao e sua porta
     def __init__(self):
@@ -20,6 +22,7 @@ class SensorInicial:
 
     # Metodo que "verifica" se a materia prima esta ou nao com defeito (apenas gera um numero aleatorio)
     def verificarMateriaPrima(self, qtd):
+
         produtosComDefeito = 0
         i = 0
 
@@ -30,21 +33,20 @@ class SensorInicial:
         i += 1
 
         msg = str(qtd-produtosComDefeito)
-        socketEquipamento = socket.socket()
-        socketEquipamento.connect(self.hostEquipamento, self.portaEquipamento)
-        socketEquipamento.send(msg)
-        socketEquipamento.send(self.controlador)
-        socketEquipamento.close()
+        socketLinhaProducao = socket.socket()
+        socketLinhaProducao.connect((self.hostLinhaProducao, self.portaRespostaLinhaProducao))
+        socketLinhaProducao.send(msg.encode('utf-8'))
+        socketLinhaProducao.close()
 
 
 # Metodo principal que cria um objeto do tipo linha de producao e que ira receber uma conexao do controlador
 def main():
-    sensorInicial = SensorInicial()
+    sensorFinal = SensorFinal()
     while True:
-        sensorInicial.controlador, sensorInicial.endr = sensorInicial.s.accept()
-        msg = sensorInicial.controlador.recv(128).decode('utf-8')
+        sensorFinal.controlador, sensorFinal.endr = sensorFinal.s.accept()
+        msg = sensorFinal.controlador.recv(128).decode('utf-8')
         msg = int(msg)
-        sensorInicial.verificarMateriaPrima(msg)
+        sensorFinal.verificarMateriaPrima(msg)
 
 
 if __name__ == '__main__':

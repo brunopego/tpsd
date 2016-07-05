@@ -33,9 +33,8 @@ class SensorInicial:
 
         msg = str(qtd-produtosComDefeito)
         socketEquipamento = socket.socket()
-        socketEquipamento.connect(self.hostEquipamento, self.portaEquipamento)
-        socketEquipamento.send(msg)
-        socketEquipamento.send(self.controlador)
+        socketEquipamento.connect((self.hostEquipamento, self.portaEquipamento))
+        socketEquipamento.send(msg.encode('utf-8'))
         socketEquipamento.close()
 
 
