@@ -3,14 +3,14 @@ from random import randrange
 
 class SensorInicial:
 
-    # Crição das variáveis referentes ao socket ao endereço ip / porta do controlador
+    # Cricao das variaveis referentes ao socket ao endereco ip / porta do controlador
     controlador = None
     endr = None
 
     hostEquipamento = '127.0.0.1'
     portaEquipamento = '6001'
 
-    # Método que define o endereço da linha de produção e sua porta
+    # Metodo que define o endereco da linha de producao e sua porta
     def __init__(self):
         self.host = '127.0.0.1'
         self.port = 6000
@@ -20,7 +20,7 @@ class SensorInicial:
         self.s.listen(1)
 
 
-    # Método que "verifica" se a matéria prima está ou não com defeito (apenas gera um número aleatório)
+    # Metodo que "verifica" se a materia prima esta ou nao com defeito (apenas gera um numero aleatorio)
     def verificarMateriaPrima(self, qtd):
         produtosComDefeito = 0
         i = 0
@@ -39,7 +39,7 @@ class SensorInicial:
         socketEquipamento.close()
 
 
-# Método principal que cria um objeto do tipo linha de produção e que irá receber uma conexão do controlador
+# Metodo principal que cria um objeto do tipo linha de producao e que ira receber uma conexao do controlador
 def main():
     sensorInicial = SensorInicial()
     while True:

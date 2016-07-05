@@ -3,11 +3,11 @@ from random import randrange
 
 class LinhaProducao:
 
-    # Crição das variáveis referentes ao sockete ao endereço ip / porta do controlador
+    # Cricao das variaveis referentes ao sockete ao endereco ip / porta do controlador
     controlador = None
     endr = None
 
-    # Método que define o endereço da linha de produção e sua porta
+    # Metodo que define o endereco da linha de producao e sua porta
     def __init__(self):
         self.host = '127.0.0.1'
         self.port = 5002
@@ -16,13 +16,13 @@ class LinhaProducao:
 
         self.s.listen(1)
 
-    # Método que fará o produto (recebe a quantidade de produto que deve ser feito)
+    # Metodo que fara o produto (recebe a quantidade de produto que deve ser feito)
     def produz(self, qtd):
         nqtd = int(qtd)
 
-        # Inicialmente define uma váriavel i como contador para o laço e outra
-        # que vai contar o número de produtos defeituosos
-        # o laço trata em cada if se o produto está defeituoso e caso sim adiciona +1 em produtosComDefeitos
+        # Inicialmente define uma variavel i como contador para o laco e outra
+        # que vai contar o numero de produtos defeituosos
+        # o laco trata em cada if se o produto esta defeituoso e caso sim adiciona +1 em produtosComDefeitos
         # Faz um produto de cada vez
         i = 0
         produtosComDefeitos = 0
@@ -42,28 +42,28 @@ class LinhaProducao:
         # Finalmente retorna o resultado de produtos com defeito e a quantidade produzida independente do defeito
         self.retornaResultado(produtosComDefeitos, nqtd)
 
-    # Método que "verifica" se a matéria prima está ou não com defeito (apenas gera um número aleatório)
+    # Metodo que "verifica" se a materia prima esta ou nao com defeito (apenas gera um numero aleatorio)
     def sensorInicial(self):
         defeito = randrange(0, 10)
         if defeito == 1:
             return False
         return True
 
-    # Método que "verifica" o produto durante o processo de produção (apenas gera um número aleatório)
+    # Metodo que "verifica" o produto durante o processo de producao (apenas gera um numero aleatorio)
     def equipamentoDeProducao(self):
         defeito = randrange(0, 10)
         if defeito == 2:
             return False
         return True
 
-    # Método que "verifica" o produto final (apenas gera um número aleatório)
+    # Metodo que "verifica" o produto final (apenas gera um numero aleatorio)
     def sensorFinal(self):
         defeito = randrange(0, 10)
         if defeito == 2:
             return False
         return True
 
-    # Metodo para retornar o resultado para o controlador de produção
+    # Metodo para retornar o resultado para o controlador de producao
     def retornaResultado(self, produtosComDefeitos: int, qtd: int):
         if produtosComDefeitos == 0:
             print("Produtos prontos para serem entregues! ")
@@ -81,7 +81,7 @@ class LinhaProducao:
             resp = self.controlador.recv(128).decode('utf-8')
             self.produz(resp)
 
-# Mètodo principal que cria um objeto do tipo linha de produção e que irá receber uma conexão do controlador
+# Mètodo principal que cria um objeto do tipo linha de producao e que ira receber uma conexao do controlador
 def main():
     linhaProducao = LinhaProducao()
     while True:

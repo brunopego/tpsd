@@ -6,7 +6,7 @@ class Fornecedor:
     cliente = None
     endr = None
 
-    # Método que define o endereço IP / porta do fornecedor
+    # Metodo que define o endereco IP / porta do fornecedor
     def __init__(self):
         self.host = '127.0.0.1'
         self.port = 5001
@@ -15,7 +15,7 @@ class Fornecedor:
 
         self.s.listen(1)
 
-    # Método que recebe a quantidade de matéria prima deve ser enviada e as retornam
+    # Metodo que recebe a quantidade de materia prima deve ser enviada e as retornam
     def fornecerMateriaPrima(self, cliente, endr):
         msg = cliente.recv(128).decode('utf-8')
         qtd_solicitada = int(msg)
@@ -24,7 +24,7 @@ class Fornecedor:
         cliente.send(str(qtd_solicitada).encode('utf-8'))
         cliente.close()
 
-# Método principal que cria um objeto do tipo fornecedor e que ira receber uma conexão do controlador
+# Metodo principal que cria um objeto do tipo fornecedor e que ira receber uma conexao do controlador
 def main():
     fornecedor = Fornecedor()
 
